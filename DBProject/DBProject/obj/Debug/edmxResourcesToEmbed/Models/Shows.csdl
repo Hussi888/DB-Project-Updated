@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShowsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="movieID" />
+    </Key>
+    <Property Name="movieID" Type="Int32" Nullable="false" />
+    <Property Name="movieName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="releaseDate" Type="DateTime" Precision="0" />
+    <Property Name="movieRatings" Type="Int32" />
+    <Property Name="genreID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Shows" Relationship="Self.FK__Show__movieID__403A8C7D" FromRole="Movie" ToRole="Show" />
+  </EntityType>
+  <EntityType Name="Show">
+    <Key>
+      <PropertyRef Name="showID" />
+      <PropertyRef Name="showType" />
+    </Key>
+    <Property Name="showID" Type="Int32" Nullable="false" />
+    <Property Name="showType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="movieID" Type="Int32" Nullable="false" />
+    <Property Name="TVShowID" Type="Int32" Nullable="false" />
+    <Property Name="airDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Movie" Relationship="Self.FK__Show__movieID__403A8C7D" FromRole="Show" ToRole="Movie" />
+    <NavigationProperty Name="TVShow" Relationship="Self.FK__Show__TVShowID__3F466844" FromRole="Show" ToRole="TVShow" />
+  </EntityType>
+  <EntityType Name="TVShow">
+    <Key>
+      <PropertyRef Name="TVShowID" />
+    </Key>
+    <Property Name="TVShowID" Type="Int32" Nullable="false" />
+    <Property Name="TVShowName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TVShowRatings" Type="Int32" />
+    <Property Name="genreID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Shows" Relationship="Self.FK__Show__TVShowID__3F466844" FromRole="TVShow" ToRole="Show" />
+  </EntityType>
+  <Association Name="FK__Show__movieID__403A8C7D">
+    <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+    <End Role="Show" Type="Self.Show" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movie">
+        <PropertyRef Name="movieID" />
+      </Principal>
+      <Dependent Role="Show">
+        <PropertyRef Name="movieID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Show__TVShowID__3F466844">
+    <End Role="TVShow" Type="Self.TVShow" Multiplicity="1" />
+    <End Role="Show" Type="Self.Show" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TVShow">
+        <PropertyRef Name="TVShowID" />
+      </Principal>
+      <Dependent Role="Show">
+        <PropertyRef Name="TVShowID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TVTDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Movies" EntityType="Self.Movie" />
+    <EntitySet Name="Shows" EntityType="Self.Show" />
+    <EntitySet Name="TVShows" EntityType="Self.TVShow" />
+    <AssociationSet Name="FK__Show__movieID__403A8C7D" Association="Self.FK__Show__movieID__403A8C7D">
+      <End Role="Movie" EntitySet="Movies" />
+      <End Role="Show" EntitySet="Shows" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Show__TVShowID__3F466844" Association="Self.FK__Show__TVShowID__3F466844">
+      <End Role="TVShow" EntitySet="TVShows" />
+      <End Role="Show" EntitySet="Shows" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

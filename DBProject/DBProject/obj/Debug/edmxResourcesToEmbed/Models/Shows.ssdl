@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ShowsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="movieID" />
+    </Key>
+    <Property Name="movieID" Type="int" Nullable="false" />
+    <Property Name="movieName" Type="varchar" MaxLength="50" />
+    <Property Name="releaseDate" Type="date" />
+    <Property Name="movieRatings" Type="int" />
+    <Property Name="genreID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Show">
+    <Key>
+      <PropertyRef Name="showID" />
+      <PropertyRef Name="showType" />
+    </Key>
+    <Property Name="showID" Type="int" Nullable="false" />
+    <Property Name="showType" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="movieID" Type="int" Nullable="false" />
+    <Property Name="TVShowID" Type="int" Nullable="false" />
+    <Property Name="airDate" Type="date" />
+  </EntityType>
+  <EntityType Name="TVShow">
+    <Key>
+      <PropertyRef Name="TVShowID" />
+    </Key>
+    <Property Name="TVShowID" Type="int" Nullable="false" />
+    <Property Name="TVShowName" Type="varchar" MaxLength="50" />
+    <Property Name="TVShowRatings" Type="int" />
+    <Property Name="genreID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Show__movieID__403A8C7D">
+    <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+    <End Role="Show" Type="Self.Show" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Movie">
+        <PropertyRef Name="movieID" />
+      </Principal>
+      <Dependent Role="Show">
+        <PropertyRef Name="movieID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Show__TVShowID__3F466844">
+    <End Role="TVShow" Type="Self.TVShow" Multiplicity="1" />
+    <End Role="Show" Type="Self.Show" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TVShow">
+        <PropertyRef Name="TVShowID" />
+      </Principal>
+      <Dependent Role="Show">
+        <PropertyRef Name="TVShowID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ShowsModelStoreContainer">
+    <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Show" EntityType="Self.Show" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TVShow" EntityType="Self.TVShow" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Show__movieID__403A8C7D" Association="Self.FK__Show__movieID__403A8C7D">
+      <End Role="Movie" EntitySet="Movie" />
+      <End Role="Show" EntitySet="Show" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Show__TVShowID__3F466844" Association="Self.FK__Show__TVShowID__3F466844">
+      <End Role="TVShow" EntitySet="TVShow" />
+      <End Role="Show" EntitySet="Show" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

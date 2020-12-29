@@ -1,0 +1,220 @@
+﻿@using DBProject.Models
+@model ShowLists
+
+<ul>
+    <li>
+        <a href="../Home/Home">
+            <img src="~/Content/images/Asset 16.png" height="13" width="80">
+        </a>
+    </li>
+    <li><a href="../Profile/Profile">Profile</a></li>
+    <li><a href="../Shows/Trending">Trending</a></li>
+    <li><a href="../Calender/Calender">Calender</a></li>
+    <li><a href="../Shows/Shows">Discover</a></li>
+    <li style="float:right"><a href="../Home/About">About</a></li>
+</ul>
+
+<br /> <br /> <br /> <br />
+
+<div class="Movies">
+    <fieldset style="color:white; overflow-x:auto;">
+        <legend>All Movies:</legend>
+        <table>
+            <thead><tr><th>Image</th><th>MovieName</th><th>ReleaseDate</th><th>movieRatings</th><th>Genre</th></tr></thead>
+            <tbody>
+                @foreach (Movies m in Model.allMovies)
+                {
+                <tr>
+                    <td><img class="shadow" src="../../Content/images/Posters/@(m.movieName).jpg" height="150px" width="100px"></td>
+                    <td>@m.movieName</td>
+                    <td>@m.releaseDate</td>
+                    <td>@m.movieRatings%</td>
+                    <td>@m.genreName</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+
+<div class="TVShows">
+    <fieldset style="color:white; overflow-x:auto;">
+        <legend>All TVShows:</legend>
+        <table>
+            <thead><tr><th>Image</th><th>TVShowName</th><th>releaseDate</th><th>TVShowRatings</th><th>Genre</th></tr></thead>
+            <tbody>
+                @foreach (TVShows t in Model.allTVShows)
+                {
+                <tr>
+                    <td><img class="shadow" src="../../Content/images/Posters/@(t.TVShowName).jpg" height="150px" width="100px"></td>
+                    <td>@t.TVShowName</td>
+                    <td>@t.releaseDate</td>
+                    <td>@t.TVShowRatings%</td>
+                    <td>@t.genreName</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+
+
+<div class="main">
+
+    <div id="Movies"></div>
+    <div id="TVShows"></div>
+
+</div>
+
+<style>
+    table {
+        display: table-cell;
+        border-collapse: collapse;
+    }
+
+    .Movies {
+        float: left;
+        margin-top: auto;
+        width: auto;
+        margin-left: 70px;
+    }
+
+    .TVShows {
+        float: left;
+        width: auto;
+        margin-top: auto;
+        margin-left: 70px;
+    }
+
+    .main {
+        text-align: center;
+    }
+
+    th {
+        text-align: center;
+        padding: 15px;
+        vertical-align: bottom;
+        background-color: #EF3B3A;
+        color: white;
+    }
+
+    td {
+        padding: 15px;
+        text-align: center;
+    }
+
+    tr {
+        background-color: #F1584E;
+    }
+
+        tr:hover {
+            background-color: #EF3B3A;
+        }
+
+    .logo {
+        display: inline-block;
+        vertical-align: top;
+        width: 50px;
+        height: 50px;
+        margin-right: 20px;
+        margin-top: 15px; /* if you want it vertically middle of the navbar. */
+    }
+
+    header {
+        background: #F1584E;
+        color: #EF3B3A;
+        text-decoration: solid;
+        font-size: x-large;
+        align-content: center;
+    }
+
+    body {
+        background-image: url('../../Content/images/collage3.jpg');
+        font-family: "Roboto", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .form {
+        background: #EF3B3A;
+        margin: auto;
+        padding: 45px;
+        text-align: center;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+
+
+    .formOriginal {
+        position: relative;
+        z-index: 1;
+        background: #EF3B3A;
+        max-width: 360px;
+        margin: 100px auto 100px;
+        padding: 45px;
+        text-align: center;
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+
+    .form button {
+        font-family: "Roboto", sans-serif;
+        text-transform: uppercase;
+        outline: 0;
+        background: #F1584E;
+        width: 100%;
+        border: 0;
+        padding: 15px;
+        color: #FFFFFF;
+        font-size: 14px;
+        -webkit-transition: all 0.3 ease;
+        transition: all 0.3 ease;
+        cursor: pointer;
+    }
+
+        .form button:hover, .form button:active, .form button:focus {
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #EF3B3A;
+        position: -webkit-sticky; /* Safari */
+        position: sticky;
+        position: fixed;
+        z-index: 5;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 0px;
+        margin: 0px;
+        text-align: center;
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    li {
+        float: left;
+    }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 16px 20px;
+            text-decoration: inherit;
+        }
+
+            /* Change the link color to #111 (black) on hover */
+            li a:hover {
+                background-color: #F1584E;
+            }
+
+    .active {
+        background-color: #F1584E;
+    }
+    .shadow {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+</style>

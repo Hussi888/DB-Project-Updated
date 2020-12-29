@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ShowsModelStoreContainer" CdmEntityContainer="TVTDBEntities">
+    <EntitySetMapping Name="Movies">
+      <EntityTypeMapping TypeName="ShowsModel.Movie">
+        <MappingFragment StoreEntitySet="Movie">
+          <ScalarProperty Name="movieID" ColumnName="movieID" />
+          <ScalarProperty Name="movieName" ColumnName="movieName" />
+          <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
+          <ScalarProperty Name="movieRatings" ColumnName="movieRatings" />
+          <ScalarProperty Name="genreID" ColumnName="genreID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Shows">
+      <EntityTypeMapping TypeName="ShowsModel.Show">
+        <MappingFragment StoreEntitySet="Show">
+          <ScalarProperty Name="showID" ColumnName="showID" />
+          <ScalarProperty Name="showType" ColumnName="showType" />
+          <ScalarProperty Name="movieID" ColumnName="movieID" />
+          <ScalarProperty Name="TVShowID" ColumnName="TVShowID" />
+          <ScalarProperty Name="airDate" ColumnName="airDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TVShows">
+      <EntityTypeMapping TypeName="ShowsModel.TVShow">
+        <MappingFragment StoreEntitySet="TVShow">
+          <ScalarProperty Name="TVShowID" ColumnName="TVShowID" />
+          <ScalarProperty Name="TVShowName" ColumnName="TVShowName" />
+          <ScalarProperty Name="TVShowRatings" ColumnName="TVShowRatings" />
+          <ScalarProperty Name="genreID" ColumnName="genreID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
